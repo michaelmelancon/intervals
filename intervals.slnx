@@ -1,0 +1,15 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="appveyor.yml" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Intervals.Test//Intervals.Test.csproj" />
+  <Project Path="Intervals//Intervals.csproj" />
+</Solution>
