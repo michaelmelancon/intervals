@@ -1,11 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>a library for working with intervals</Description>
+    <Description>A .NET library for working with intervals that can be inclusive or exclusive on either end. Supports unbounded intervals, intersection, overlap detection, and custom comparers. Works with any IComparable&lt;T&gt; type.</Description>
     <Authors>Michael Melancon</Authors>
     <AssemblyName>Intervals</AssemblyName>
     <RootNamespace>Intervals</RootNamespace>
     <PackageId>Intervals</PackageId>
+    <PackageTags>interval;range;comparable;netstandard</PackageTags>
+    <PackageProjectUrl>https://github.com/michaelmelancon/intervals</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/michaelmelancon/intervals</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <TargetFrameworks>netstandard1.0;netstandard2.0;net35</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
