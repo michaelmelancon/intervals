@@ -17,7 +17,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0
+        dotnet-version: '8.0.x'
 
     - name: Restore dependencies
       run: dotnet restore
@@ -28,6 +28,15 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --configuration Release
 
+    - name: Package the project
+      run: dotnet pack --configuration Release --no-build --output ./packages
+
+    - name: Upload NuGet package artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-packages
+        path: ./packages/*.nupkg
+
   deploy:
     name: Publish to NuGet
     needs: build
@@ -35,21 +44,18 @@ jobs:
     permissions:
       contents: read
     steps:
-    - name: Checkout the code
-      uses: actions/checkout@v3
+    - name: Download NuGet package artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: nuget-packages
+        path: ./packages
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 7.0
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Package the project
-      run: dotnet pack --configuration Release --output ./packages
+        dotnet-version: '8.0.x'
 
     - name: Publish to NuGet
       env:
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      run: dotnet nuget push "packages/*.nupkg" --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "packages/*.nupkg" --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
